@@ -1,10 +1,15 @@
 # Next.js TypeScript microCMS ブログサイト作成
 
 ## 要件
-- Next.js(React)環境
-- TypeScriptを使用
-- cssはstyled-component
-- microCMSをヘッドレス導入
+- Next.js(React)環境  
+- TypeScriptを使用  
+- cssはstyled-component  
+- microCMSをヘッドレス導入  
+
+## CSSの構成
+- グローバルスタイル サイト全体に適用  
+- styled-component(CSS in JS)でコンポーネントごとに適用  
+
 
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
