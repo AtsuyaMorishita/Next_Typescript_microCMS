@@ -5,18 +5,11 @@ import styles from '../styles/Home.module.css'
 
 
 import { Hero } from 'components/hero'
-import { Layout } from 'components/layout'
 
 
 const inter = Inter({ subsets: ['latin'] })
 
 
 export default function Home() {
-  return (
-    <>
-      <Layout>
-        <Hero />
-      </Layout>
-    </>
-  )
+  return <Hero title='CUBE' subTitle='こちらはトップページです。' imageOn={true} />
 }
