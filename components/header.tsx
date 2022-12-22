@@ -1,3 +1,11 @@
+import { Logo } from "./logo"
+import { Nav } from "./nav"
+
 export const Header = () => {
-  return <header>HEADER</header>
+  return (
+    <header>
+      <Logo />
+      <Nav />
+    </header>
+  ) 
 }
