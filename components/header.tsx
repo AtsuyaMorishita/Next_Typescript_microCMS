@@ -1,11 +1,11 @@
-import { Logo } from "./logo"
-import { Nav } from "./nav"
+import { Logo } from "./logo";
+import { Nav } from "./nav";
 
 export const Header = () => {
   return (
     <header>
-      <Logo />
+      <Logo logoBox />
       <Nav />
     </header>
-  ) 
-}
+  );
+};
