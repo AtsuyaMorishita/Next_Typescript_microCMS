@@ -10,6 +10,11 @@
 - グローバルスタイル サイト全体に適用  
 - styled-component(CSS in JS)でコンポーネントごとに適用  
 
+## TODOメモ
+- Prettier導入  
+https://zenn.dev/k_kazukiiiiii/articles/670ebae0005872  
+- style-components等スニペット登録をしておく  
+
 
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
