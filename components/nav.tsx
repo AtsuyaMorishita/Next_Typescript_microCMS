@@ -1,20 +1,42 @@
-import Link from "next/link"
+import Link from "next/link";
+import styled from "styled-components";
 
 export const Nav = () => {
   return (
     <nav>
-      <ul>
+      <SList>
         <li>
-          <Link href="/">HOME</Link>
+          <SLink href="/">HOME</SLink>
         </li>
         <li>
-          <Link href="/about">ABOUT</Link>
+          <SLink href="/about">ABOUT</SLink>
         </li>
         <li>
-          <Link href="/blog">BLOG</Link>
+          <SLink href="/blog">BLOG</SLink>
         </li>
-      </ul>
+      </SList>
     </nav>
-  )
-}
+  );
+};
 
+const SList = styled.ul`
+  display: flex;
+  gap: 2em;
+`;
+
+const SLink = styled(Link)`
+  @media screen and (max-width: 767px) {
+    //遷移後にボタンの色を元に戻す
+    -webkit-tap-highlight-color: transparent;
+    //クリック時にボタンの色を変える
+    &:active {
+      color: var(--accent);
+    }
+  }
+
+  @media screen and (min-width: 767px) {
+    &:hover {
+      color: var(--accent);
+    }
+  }
+`;
