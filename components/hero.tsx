@@ -11,15 +11,29 @@ export const Hero = (props: Props) => {
   const { title, subTitle, imageOn } = props;
 
   return (
-    <SText>
-      <STitle>{title}</STitle>
-      <SSubTitle>{subTitle}</SSubTitle>
+    <SFlexContainer>
+      <SText>
+        <STitle>{title}</STitle>
+        <SSubTitle>{subTitle}</SSubTitle>
+      </SText>
       {imageOn && <figure>[画像]</figure>}
-    </SText>
+    </SFlexContainer>
   );
 };
 
 //styled-component
+const SFlexContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  @media (min-width: 768px) {
+    text-align: left;
+    justify-content: space-between;
+    flex-direction: row;
+  }
+`;
+
 const SText = styled.div`
   padding-top: calc(var(--display) * 0.5);
   padding-bottom: calc(var(--display) * 0.7);
