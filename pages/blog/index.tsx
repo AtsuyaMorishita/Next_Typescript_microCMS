@@ -4,11 +4,14 @@ import { Inter } from "@next/font/google";
 import styles from "../styles/Home.module.css";
 
 import { Hero } from "components/hero";
+import { Container } from "components/container";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Blog() {
   return (
-    <Hero title="CUBE" subTitle="こちらはブログページです。" imageOn={false} />
+    <Container>
+      <Hero title="CUBE" subTitle="こちらはブログページです。" imageOn={false} />
+    </Container>
   );
 }
