@@ -49,12 +49,13 @@ const SFlexContainer = styled.div`
 
 //2カラムメイン
 const SMain = styled.div`
-  width: 768px;
+  @media screen and (min-width: 767px) {
+    width: 768px;
+  }
 `;
 
 //2カラムサイド
 const SSide = styled.div`
-  width: 240px;
   * {
     text-align: right;
   }
@@ -66,6 +67,7 @@ const SSide = styled.div`
   }
 
   @media screen and (min-width: 767px) {
+    width: 240px;
     position: sticky;
     top: 40px;
     align-self: flex-start;

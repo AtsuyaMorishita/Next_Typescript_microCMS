@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Container } from "./container";
 import { Logo } from "./logo";
+import { Social } from "./social";
 
 export const Footer = () => {
   return (
@@ -8,7 +9,7 @@ export const Footer = () => {
       <Container>
         <SFlexContainer>
           <Logo />
-          [ソーシャル]
+          {/* <Social /> */}
         </SFlexContainer>
       </Container>
     </SFooter>

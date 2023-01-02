@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
+import eyeCatch from "images/about.jpg";
 import { Inter } from "@next/font/google";
 import styles from "../styles/Home.module.css";
 
@@ -12,14 +13,17 @@ import {
   TwoColumnMain,
   TwoColumnSidebar,
 } from "components/twoColumn";
+import styled from "styled-components";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function About() {
   return (
     <Container>
-      <Hero title="CUBE" subTitle="こちらはaboutページです。" imageOn={false} />
-
+      <Hero title="CUBE" subTitle="こちらはaboutページです。" />
+      <SFigure>
+        <Image src={eyeCatch} alt="" fill priority placeholder="blur" />
+      </SFigure>
       <TwoColumn>
         <TwoColumnMain>
           <PostBody>
@@ -31,7 +35,8 @@ export default function About() {
             <p>
               こちらはダミーテキストです。こちらはダミーテキストです。こちらはダミーテキストです。こちらはダミーテキストです。こちらはダミーテキストです。こちらはダミーテキストです。こちらはダミーテキストです。こちらはダミーテキストです。こちらはダミーテキストです。こちらはダミーテキストです。こちらはダミーテキストです。こちらはダミーテキストです。こちらはダミーテキストです。
               こちらはダミーテキストです。こちらはダミーテキストです。こちらはダミーテキストです。
-            </p>s
+            </p>
+            s
             <p>
               こちらはダミーテキストです。こちらはダミーテキストです。こちらはダミーテキストです。こちらはダミーテキストです。こちらはダミーテキストです。こちらはダミーテキストです。こちらはダミーテキストです。こちらはダミーテキストです。こちらはダミーテキストです。こちらはダミーテキストです。こちらはダミーテキストです。こちらはダミーテキストです。こちらはダミーテキストです。
               こちらはダミーテキストです。こちらはダミーテキストです。こちらはダミーテキストです。
@@ -51,3 +56,11 @@ export default function About() {
     </Container>
   );
 }
+
+const SFigure = styled.figure`
+  img {
+    object-fit: contain;
+    position: relative !important;
+    max-width: 1152px;
+  }
+`;

@@ -1,9 +1,11 @@
 import styled from "styled-components";
+import { Social } from "./social";
 
 export const Contact = () => {
   return (
     <SSstack>
       <SHeading>Contact</SHeading>
+      <Social iconSize="30px" />
       <address>cube.web.mail.address</address>
     </SSstack>
   );

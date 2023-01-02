@@ -1,10 +1,12 @@
+import Image from "next/image";
 import styled from "styled-components";
+import cube from "images/cube.jpg";
 
 //型定義
 type Props = {
   title: string;
   subTitle: string;
-  imageOn: boolean;
+  imageOn?: boolean;
 };
 
 export const Hero = (props: Props) => {
@@ -16,7 +18,11 @@ export const Hero = (props: Props) => {
         <STitle>{title}</STitle>
         <SSubTitle>{subTitle}</SSubTitle>
       </SText>
-      {imageOn && <figure>[画像]</figure>}
+      {imageOn && (
+        <SFigure>
+          <Image src={cube} alt="" fill priority placeholder="blur" />
+        </SFigure>
+      )}
     </SFlexContainer>
   );
 };
@@ -47,4 +53,16 @@ const STitle = styled.h1`
 
 const SSubTitle = styled.p`
   font-size: var(--small-heading2);
+`;
+
+const SFigure = styled.figure`
+  img {
+    object-fit: contain;
+    position: relative !important;
+    width: auto !important;
+    @media (min-width: 768px) {
+      max-width: 576px;
+      width: 100% !important;
+    }
+  }
 `;

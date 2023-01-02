@@ -11,7 +11,7 @@ const inter = Inter({ subsets: ["latin"] });
 export default function Home() {
   return (
     <Container>
-      <Hero title="CUBE" subTitle="こちらはトップページです。" imageOn={true} />
+      <Hero title="CUBE" subTitle="こちらはトップページです。" imageOn />
     </Container>
   );
 }

@@ -8,7 +8,7 @@ export const Header = () => {
     <header>
       <Container large>
         <SFlexContainer>
-          <Logo logoBox />
+          <Logo logobox />
           <Nav />
         </SFlexContainer>
       </Container>
