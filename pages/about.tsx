@@ -21,7 +21,13 @@ const inter = Inter({ subsets: ["latin"] });
 export default function About() {
   return (
     <Container>
-      <Meta pageTitle="アバウト" pageDesc="About development activities" />
+      <Meta
+        pageTitle="アバウト"
+        pageDesc="About development activities"
+        pageImg={eyeCatch.src}
+        pageImgW={eyeCatch.width}
+        pageImgH={eyeCatch.height}
+      />
 
       <Hero title="CUBE" subTitle="こちらはaboutページです。" />
       <SFigure>
