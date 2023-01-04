@@ -1,7 +1,25 @@
-import { client } from "lib/api";
+import { Container } from "components/container";
+import { getPostBySlug } from "lib/api";
 
-export default function Schedule() {
-  return <h1>記事タイトル</h1>;
+//記事データの型指定
+type blogType = {
+  title: any;
+  publish: any;
+  content: any;
+  eyecatch: any;
+  categories: any;
+};
+
+export default function Schedule(props: blogType) {
+  /**
+   * 下記getStaticProps関数で指定した各propsを使用する
+   */
+  const { title, publish, content, eyecatch, categories } = props;
+  return (
+    <Container>
+      <h1>{title}</h1>
+    </Container>
+  );
 }
 
 /**
@@ -9,9 +27,27 @@ export default function Schedule() {
  * 非同期関数の返り値は、特別な処理をしなくてもPromiseオブジェクトになる
  */
 export async function getStaticProps() {
-  const resPromise = client.get({
-    endpoint: "blogs",
-  });
+  //指定するスラッグ名
+  const slug = "schedule";
+  //指定したスラッグと同じ記事データ
+  const post = await getPostBySlug(slug);
+
+  return {
+    props: {
+      //記事データを使いやすい形にして、propsとして渡す
+      title: post.title,
+      publish: post.publishDate,
+      content: post.content,
+      eyecatch: post.eyecatch,
+      categories: post.categories,
+    },
+  };
+
+  // TODO: ▼ 後から削除する ▼
+
+  // const resPromise = client.get({
+  //   endpoint: "blogs",
+  // });
 
   /**
    * awaitはPromiseオブジェクトの状態を評価し、
@@ -20,14 +56,14 @@ export async function getStaticProps() {
    * ・Rejected : 処理が失敗した時
    * ・Pending : FulfilledでもRejectedでもない状態
    */
-  try {
-    const res = await resPromise;
-    console.log(res);
-  } catch (err) {
-    console.log(err);
-  }
+  // try {
+  //   const res = await resPromise;
+  //   console.log(res);
+  // } catch (err) {
+  //   console.log(err);
+  // }
 
-  return {
-    props: {},
-  };
+  // return {
+  //   props: {},
+  // };
 }
