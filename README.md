@@ -1,24 +1,26 @@
 # Next.js TypeScript microCMS ブログサイト作成
 
 ## 要件
-- Next.js(React)環境  
-- TypeScriptを使用  
-- cssはstyled-component  
-- microCMSをヘッドレス導入  
 
-## CSSの構成
-- グローバルスタイル サイト全体に適用  
-- styled-component(CSS in JS)でコンポーネントごとに適用  
+- Next.js(React)環境
+- TypeScript を使用
+- css は styled-component
+- microCMS をヘッドレス導入
 
-## TODOメモ
-- Prettier導入  
-https://zenn.dev/k_kazukiiiiii/articles/670ebae0005872  
-- style-components等スニペット登録をしておく  
+## CSS の構成
+
+- グローバルスタイル サイト全体に適用
+- styled-component(CSS in JS)でコンポーネントごとに適用
+
+## TODO メモ
+
+- Prettier 導入  
+  https://zenn.dev/k_kazukiiiiii/articles/670ebae0005872
+- style-components や各種 jsx にスニペット登録をしておく
 
 ## 不明点
-- footerにsocialコンポーネントを呼び出すとエラーが起きる  
 
-
+- footer に social コンポーネントを呼び出すとエラーが起きる
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
@@ -54,4 +56,5 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
 # next-react-typescript-microcms
