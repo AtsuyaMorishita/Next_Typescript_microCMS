@@ -1,6 +1,12 @@
 import { createClient } from "microcms-js-sdk";
 
+/**
+ * .envファイルに記載したキーやドメインを呼び出して使える状態にする
+ *
+ * .envファイルから参照する環境変数は string | undefined型
+ * そのため || "" の部分を書かないとエラーが出ます。
+ */
 export const client = createClient({
-  serviceDomain: process.env.SERVICE_DOMAIN,
-  apiKey: process.env.API_KEY,
+  serviceDomain: process.env.SERVICE_DOMAIN || "",
+  apiKey: process.env.API_KEY || "",
 });
