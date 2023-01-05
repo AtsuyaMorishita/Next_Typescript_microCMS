@@ -1,4 +1,5 @@
 import { Container } from "components/container";
+import { PostHeader } from "components/postHeader";
 import { getPostBySlug } from "lib/api";
 
 //記事データの型指定
@@ -17,7 +18,9 @@ export default function Schedule(props: blogType) {
   const { title, publish, content, eyecatch, categories } = props;
   return (
     <Container>
-      <h1>{title}</h1>
+      <article>
+        <PostHeader title={title} subTitle="Blog Article" publish={publish} />
+      </article>
     </Container>
   );
 }
@@ -29,7 +32,7 @@ export default function Schedule(props: blogType) {
 export async function getStaticProps() {
   //指定するスラッグ名
   const slug = "schedule";
-  //指定したスラッグと同じ記事データ
+  //指定したスラッグと同じ記事データ api.tsの関数を実行
   const post = await getPostBySlug(slug);
 
   return {
