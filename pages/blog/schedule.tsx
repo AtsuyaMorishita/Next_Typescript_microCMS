@@ -1,6 +1,8 @@
 import { Container } from "components/container";
 import { PostHeader } from "components/postHeader";
 import { getPostBySlug } from "lib/api";
+import Image from "next/image";
+import styled from "styled-components";
 
 //記事データの型指定
 type blogType = {
@@ -12,16 +14,27 @@ type blogType = {
 };
 
 export default function Schedule(props: blogType) {
-  console.log("schedule.tsx", props.eyecatch);
-
   /**
    * 下記getStaticProps関数で指定した各propsを使用する
    */
   const { title, publish, content, eyecatch, categories } = props;
+
+  console.log("schedule.tsx", eyecatch.url);
+
   return (
     <Container>
       <article>
         <PostHeader title={title} subTitle="Blog Article" publish={publish} />
+
+        <SFigure>
+          <Image
+            src={eyecatch.url}
+            alt=""
+            width={eyecatch.width}
+            height={eyecatch.height}
+            priority
+          />
+        </SFigure>
       </article>
     </Container>
   );
@@ -30,7 +43,7 @@ export default function Schedule(props: blogType) {
 /**
  * asyncを付けて関数を宣言すると非同期関数を定義することができる
  * 非同期関数の返り値は、特別な処理をしなくてもPromiseオブジェクトになる
- * 
+ *
  * getStaticPropsでreturnしたpropsは、_app.tsxのpagePropsとなり、
  * それがページコンポーネント(今回の場合はschedule.tsx)に渡される
  */
@@ -51,3 +64,13 @@ export async function getStaticProps() {
     },
   };
 }
+
+const SFigure = styled.figure`
+  img {
+    object-fit: contain;
+    position: relative !important;
+    max-width: 1152px;
+    width: 100%;
+    height: auto;
+  }
+`;
