@@ -12,6 +12,8 @@ type blogType = {
 };
 
 export default function Schedule(props: blogType) {
+  console.log("schedule.tsx", props.eyecatch);
+
   /**
    * 下記getStaticProps関数で指定した各propsを使用する
    */
@@ -28,6 +30,9 @@ export default function Schedule(props: blogType) {
 /**
  * asyncを付けて関数を宣言すると非同期関数を定義することができる
  * 非同期関数の返り値は、特別な処理をしなくてもPromiseオブジェクトになる
+ * 
+ * getStaticPropsでreturnしたpropsは、_app.tsxのpagePropsとなり、
+ * それがページコンポーネント(今回の場合はschedule.tsx)に渡される
  */
 export async function getStaticProps() {
   //指定するスラッグ名
@@ -45,28 +50,4 @@ export async function getStaticProps() {
       categories: post.categories,
     },
   };
-
-  // TODO: ▼ 後から削除する ▼
-
-  // const resPromise = client.get({
-  //   endpoint: "blogs",
-  // });
-
-  /**
-   * awaitはPromiseオブジェクトの状態を評価し、
-   * その状態がFulfilledかRejectedに変わるまで待ち、変わってから次の処理へ進む
-   * ・Fulfilled : 処理が成功した時
-   * ・Rejected : 処理が失敗した時
-   * ・Pending : FulfilledでもRejectedでもない状態
-   */
-  // try {
-  //   const res = await resPromise;
-  //   console.log(res);
-  // } catch (err) {
-  //   console.log(err);
-  // }
-
-  // return {
-  //   props: {},
-  // };
 }

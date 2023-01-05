@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock } from "@fortawesome/free-regular-svg-icons";
 import styled from "styled-components";
+import { ConvertDate } from "./convertDate";
 
 type Props = {
   title: string;
@@ -18,7 +19,7 @@ export const PostHeader = (props: Props) => {
       {publish && (
         <SPublish>
           <FontAwesomeIcon icon={faClock} size="lg" color="var(--gray-25)" />
-          {publish}
+          <ConvertDate dateISO={publish} />
         </SPublish>
       )}
     </SStack>

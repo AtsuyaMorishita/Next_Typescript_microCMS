@@ -10,6 +10,7 @@ import { Meta } from "components/meta";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+
   return (
     <Container>
       {/* [pageTitleとPageDescがないため、デフォルトに設定される] */}

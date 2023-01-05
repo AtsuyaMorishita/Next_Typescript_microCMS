@@ -8,6 +8,8 @@ import { config } from "@fortawesome/fontawesome-svg-core";
 config.autoAddCss = false;
 
 export default function App({ Component, pageProps }: AppProps) {
+  console.log('_app.tsx', pageProps);
+
   return (
     <Layout>
       <Component {...pageProps} />
