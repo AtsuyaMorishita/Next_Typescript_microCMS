@@ -1,8 +1,16 @@
 import { Container } from "components/container";
 import { PostHeader } from "components/postHeader";
+import { PostBody } from "components/postBody";
 import { getPostBySlug } from "lib/api";
 import Image from "next/image";
 import styled from "styled-components";
+import {
+  TwoColumn,
+  TwoColumnMain,
+  TwoColumnSidebar,
+} from "components/twoColumn";
+import parse from "html-react-parser";
+import { ConvertBody } from "components/convertBody";
 
 //記事データの型指定
 type blogType = {
@@ -19,7 +27,6 @@ export default function Schedule(props: blogType) {
    */
   const { title, publish, content, eyecatch, categories } = props;
 
-  console.log("schedule.tsx", eyecatch.url);
 
   return (
     <Container>
@@ -35,6 +42,15 @@ export default function Schedule(props: blogType) {
             priority
           />
         </SFigure>
+
+        <TwoColumn>
+          <TwoColumnMain>
+            <PostBody>
+              {content}
+            </PostBody>
+          </TwoColumnMain>
+          <TwoColumnSidebar>サイド</TwoColumnSidebar>
+        </TwoColumn>
       </article>
     </Container>
   );
