@@ -1,4 +1,9 @@
-import parse, { DOMNode, HTMLReactParserOptions } from "html-react-parser";
+import parse from "html-react-parser";
+import Image from "next/image";
+
+/**
+ * htmlの変換処理をする
+ */
 
 type convertBodyType = {
   contentHTML?: any;
@@ -7,15 +12,14 @@ type convertBodyType = {
 export const ConvertBody = (props: convertBodyType) => {
   const { contentHTML } = props;
 
-  const html = contentHTML;
-
-  const options: HTMLReactParserOptions = {
-    replace: (domNode: DOMNode) => {
-      
+  const contentReact = parse(contentHTML, {
+    replace: (domNode: any) => {
+      if (domNode.name === "img") {
+        const { src, alt, width, height } = domNode.attribs;
+        return <Image layout="responsive" src={src} alt={alt} width={width} height={height} />;
+      }
     },
-  };
+  });
 
-  parse(html, options);
-
-  options;
+  return <>{contentReact}</>;
 };

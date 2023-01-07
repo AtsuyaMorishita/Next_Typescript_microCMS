@@ -27,7 +27,6 @@ export default function Schedule(props: blogType) {
    */
   const { title, publish, content, eyecatch, categories } = props;
 
-
   return (
     <Container>
       <article>
@@ -46,7 +45,7 @@ export default function Schedule(props: blogType) {
         <TwoColumn>
           <TwoColumnMain>
             <PostBody>
-              {content}
+              <ConvertBody contentHTML={content} />
             </PostBody>
           </TwoColumnMain>
           <TwoColumnSidebar>サイド</TwoColumnSidebar>
