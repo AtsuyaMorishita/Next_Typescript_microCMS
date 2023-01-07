@@ -11,7 +11,7 @@ import {
 } from "components/twoColumn";
 import parse from "html-react-parser";
 import { ConvertBody } from "components/convertBody";
-import CategoryList from "components/postCategories";
+import { CategoryList } from "components/postCategories";
 
 //記事データの型指定
 type blogType = {

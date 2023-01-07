@@ -1,44 +1,75 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFolderOpen } from "@fortawesome/free-regular-svg-icons";
 import Link from "next/link";
+import styled from "styled-components";
 
-// interface postCategoryType {
-//   category: any;
-// }
+type catType = {
+  //配列inオブジェクトの型指定
+  categories: { name: string; slug: string }[];
+};
 
-// export const PostCategories = (props: postCategoryType) => {
-//   const { category } = props;
-
-//   return (
-//     <ul>
-//       {categoryes.map(({ name, slug }) => (
-//         <li key={slug}>
-//           <Link href={`/blog/category/${slug}`}>{name}</Link>
-//         </li>
-//       ))}
-//     </ul>
-//   );
-// };
-
-interface Category {
-  name: string;
-  slug: string;
-}
-
-interface Props {
-  categories: Category[];
-}
-
-const categoryes: Category[] = [];
-
-const CategoryList: React.FC<Props> = ({ categories }) => {
+/**
+ * categoriesは1つの配列なので、{categories}という記述で中のオブジェクトを1つずつ取り出している
+ * propsで受け取った配列の中のオブジェクトをmap関数でループさせている
+ */
+export const CategoryList = ({ categories }: catType) => {
   return (
-    <ul>
-      {categories.map(({ name, slug }) => (
-        <li key={slug}>
-          <Link href={`/blog/category/${slug}`}>{name}</Link>
-        </li>
-      ))}
-    </ul>
+    <SFlexContainer>
+      <SHeading>
+        <FontAwesomeIcon icon={faFolderOpen} />
+        <span className="sr-only">Categories</span>
+      </SHeading>
+      <SList>
+        {/* {categoriesの中のkeyを取り出しやすく{}でしている} */}
+        {categories.map(({ slug, name }) => (
+          <SItem key={slug}>
+            <SLink href={`/blog/category/${slug}`}>{name}</SLink>
+          </SItem>
+        ))}
+      </SList>
+    </SFlexContainer>
   );
 };
 
-export default CategoryList;
+const SFlexContainer = styled.div`
+  display: flex;
+  align-items: baseline;
+  gap: 1.25rem;
+  color: var(--gray-50);
+  @media (min-width: 768px) {
+    flex-direction: column;
+  }
+`;
+
+const SHeading = styled.h3`
+  font-size: var(--small-heading2);
+  @media (min-width: 768px) {
+    width: 100%;
+  }
+`;
+
+const SList = styled.ul`
+  display: block;
+  width: 100%;
+  display: flex;
+  align-items: baseline;
+  gap: 1.25rem;
+  color: var(--gray-50);
+  font-size: var(--small-heading3);
+  gap: 0.75rem;
+  @media (min-width: 768px) {
+    flex-direction: column;
+  }
+`;
+
+const SItem = styled.li`
+  @media (min-width: 768px) {
+    width: 100%;
+  }
+`;
+
+const SLink = styled(Link)`
+  @media (min-width: 768px) {
+    display: block;
+  }
+`;
