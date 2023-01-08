@@ -8,3 +8,10 @@ export const siteMeta = {
   siteType: "website",
   siteIcon: "/favicon.png",
 };
+
+//アイキャッチの代替画像
+export const eyecatchLocal = {
+  url: "/eyecatch.jpg",
+  width: 1920,
+  height: 1280,
+};

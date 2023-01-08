@@ -14,6 +14,7 @@ import { ConvertBody } from "components/convertBody";
 import { CategoryList } from "components/postCategories";
 import { Meta } from "components/meta";
 import { extractText } from "lib/extractText";
+import { eyecatchLocal } from "lib/constants";
 
 //記事データの型指定
 type blogType = {
@@ -78,11 +79,16 @@ export default function Schedule(props: blogType) {
  */
 export async function getStaticProps() {
   //指定するスラッグ名
-  const slug = "schedule";
+  const slug = "micro";
   //指定したスラッグと同じ記事データ api.tsの関数を実行
   const post = await getPostBySlug(slug);
   //投稿本文をextractText関数で切り取る
   const description = extractText(post.content);
+  //アイキャッチを設定されてなければデフォルトを使用
+  const eyecatch = post.eyecatch ?? eyecatchLocal;
+  //プレースホルダのブラー画像を設定
+  // const { base64 } = await getPlaiceholder(eyecatch.url);
+  // eyecatch.blurDataURL = base64;
 
   return {
     props: {
@@ -90,7 +96,7 @@ export async function getStaticProps() {
       title: post.title,
       publish: post.publishDate,
       content: post.content,
-      eyecatch: post.eyecatch,
+      eyecatch: eyecatch,
       categories: post.categories,
       description: description,
     },

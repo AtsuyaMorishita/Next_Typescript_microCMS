@@ -21,6 +21,7 @@
 ## 不明点
 
 - footer に social コンポーネントを呼び出すとエラーが起きる
+- 記事アイキャッチ画像にブラー画像を設定しようとするとエラーが起きる
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
