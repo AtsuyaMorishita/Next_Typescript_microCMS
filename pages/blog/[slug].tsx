@@ -15,6 +15,7 @@ import { CategoryList } from "components/postCategories";
 import { Meta } from "components/meta";
 import { extractText } from "lib/extractText";
 import { eyecatchLocal } from "lib/constants";
+import { GetStaticProps } from "next";
 
 //記事データの型指定
 type blogType = {
@@ -26,7 +27,7 @@ type blogType = {
   description: any;
 };
 
-export default function Schedule(props: blogType) {
+export default function Post(props: blogType) {
   /**
    * 下記getStaticProps関数で指定した各propsを使用する
    */
@@ -71,24 +72,31 @@ export default function Schedule(props: blogType) {
 }
 
 /**
+ * SGの場合はgetStaticPathsでパスを指定する必要がある
+ */
+export async function getStaticPaths() {
+  return {
+    path: ["/blog/schedule", "/blog/music", "/blog/micro"],
+    fallback: false,
+  };
+}
+
+/**
  * asyncを付けて関数を宣言すると非同期関数を定義することができる
  * 非同期関数の返り値は、特別な処理をしなくてもPromiseオブジェクトになる
  *
  * getStaticPropsでreturnしたpropsは、_app.tsxのpagePropsとなり、
  * それがページコンポーネント(今回の場合はschedule.tsx)に渡される
  */
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async (context) => {
   //指定するスラッグ名
-  const slug = "micro";
+  const slug = context.params.slug;
   //指定したスラッグと同じ記事データ api.tsの関数を実行
   const post = await getPostBySlug(slug);
   //投稿本文をextractText関数で切り取る
   const description = extractText(post.content);
   //アイキャッチを設定されてなければデフォルトを使用
   const eyecatch = post.eyecatch ?? eyecatchLocal;
-  //プレースホルダのブラー画像を設定
-  // const { base64 } = await getPlaiceholder(eyecatch.url);
-  // eyecatch.blurDataURL = base64;
 
   return {
     props: {
@@ -101,7 +109,7 @@ export async function getStaticProps() {
       description: description,
     },
   };
-}
+};
 
 const SFigure = styled.figure`
   img {
