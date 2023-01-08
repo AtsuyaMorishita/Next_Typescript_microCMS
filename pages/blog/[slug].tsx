@@ -1,7 +1,7 @@
 import { Container } from "components/container";
 import { PostHeader } from "components/postHeader";
 import { PostBody } from "components/postBody";
-import { getPostBySlug } from "lib/api";
+import { getAllSlugs, getPostBySlug } from "lib/api";
 import Image from "next/image";
 import styled from "styled-components";
 import {
@@ -15,7 +15,7 @@ import { CategoryList } from "components/postCategories";
 import { Meta } from "components/meta";
 import { extractText } from "lib/extractText";
 import { eyecatchLocal } from "lib/constants";
-import { GetStaticProps } from "next";
+import { GetStaticPaths, GetStaticProps } from "next";
 
 //記事データの型指定
 type blogType = {
@@ -73,13 +73,18 @@ export default function Post(props: blogType) {
 
 /**
  * SGの場合はgetStaticPathsでパスを指定する必要がある
+ * 今回の場合:GetStaticPathsはなくてもエラーは起きない 理由は調査中
  */
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
+  //全ての記事のタイトルとスラッグを取得 slugとtitleのオブジェクトが格納されている
+  const allSlugs = await getAllSlugs();
+
   return {
-    path: ["/blog/schedule", "/blog/music", "/blog/micro"],
+    //受け取ったスラッグの数だけmap関数で配列を再生成している
+    paths: allSlugs.map(({ slug }: any) => `/blog/${slug}`),
     fallback: false,
   };
-}
+};
 
 /**
  * asyncを付けて関数を宣言すると非同期関数を定義することができる
@@ -89,12 +94,20 @@ export async function getStaticPaths() {
  * それがページコンポーネント(今回の場合はschedule.tsx)に渡される
  */
 export const getStaticProps: GetStaticProps = async (context) => {
-  //指定するスラッグ名
-  const slug = context.params.slug;
-  //指定したスラッグと同じ記事データ api.tsの関数を実行
+  //undefinedの可能性があるプロパティにはてなをつけるとエラーが消える？
+  const slug = context.params?.slug;
+
+  //slugがstring以外は除外
+  if (typeof slug !== "string") {
+    return { notFound: true };
+  }
+
+  //getStaticPathで指定したパスのスラッグが関数の引数に入る
   const post = await getPostBySlug(slug);
+
   //投稿本文をextractText関数で切り取る
   const description = extractText(post.content);
+
   //アイキャッチを設定されてなければデフォルトを使用
   const eyecatch = post.eyecatch ?? eyecatchLocal;
 

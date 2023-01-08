@@ -14,15 +14,33 @@ export const client = createClient({
 /**
  * 指定したスラッグ(slug)の記事データを取得する
  */
-export async function getPostBySlug(slug: string) {
+export const getPostBySlug = async (slug: string) => {
   try {
+    //slugが一致する記事データを取得
     const post = await client.get({
       endpoint: "blogs",
-      queries: { filters: `slug[equals]${slug}` }, //slugが一致する記事データを取得
+      queries: { filters: `slug[equals]${slug}` },
     });
     return post.contents[0];
   } catch (err) {
     console.log("~~ getPostBySlug ~~");
     console.log(err);
   }
-}
+};
+
+/**
+ * 全ての記事データを取得する
+ */
+export const getAllSlugs = async (limit = 100) => {
+  try {
+    const slugs = await client.get({
+      //上限100件で全てのタイトルとスラッグを取得する
+      endpoint: "blogs",
+      queries: { fields: "title,slug", orders: "-publishDate", limit: limit },
+    });
+    return slugs.contents;
+  } catch (err) {
+    console.log("~~getAllSlugs~~");
+    console.log(err);
+  }
+};
