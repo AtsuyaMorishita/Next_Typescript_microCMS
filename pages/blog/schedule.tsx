@@ -12,6 +12,8 @@ import {
 import parse from "html-react-parser";
 import { ConvertBody } from "components/convertBody";
 import { CategoryList } from "components/postCategories";
+import { Meta } from "components/meta";
+import { extractText } from "lib/extractText";
 
 //記事データの型指定
 type blogType = {
@@ -20,17 +22,26 @@ type blogType = {
   content: any;
   eyecatch: any;
   categories: any;
+  description: any;
 };
 
 export default function Schedule(props: blogType) {
   /**
    * 下記getStaticProps関数で指定した各propsを使用する
    */
-  const { title, publish, content, eyecatch, categories } = props;
+  const { title, publish, content, eyecatch, categories, description } = props;
 
   return (
     <Container>
       <article>
+        <Meta
+          pageTitle={title}
+          pageDesc={description}
+          pageImg={eyecatch.url}
+          pageImgW={eyecatch.width}
+          pageImgH={eyecatch.height}
+        />
+
         <PostHeader title={title} subTitle="Blog Article" publish={publish} />
 
         <SFigure>
@@ -70,6 +81,8 @@ export async function getStaticProps() {
   const slug = "schedule";
   //指定したスラッグと同じ記事データ api.tsの関数を実行
   const post = await getPostBySlug(slug);
+  //投稿本文をextractText関数で切り取る
+  const description = extractText(post.content);
 
   return {
     props: {
@@ -79,6 +92,7 @@ export async function getStaticProps() {
       content: post.content,
       eyecatch: post.eyecatch,
       categories: post.categories,
+      description: description,
     },
   };
 }

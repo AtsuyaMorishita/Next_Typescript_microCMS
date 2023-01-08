@@ -9,7 +9,7 @@ const { siteTitle, siteDesc, siteUrl, siteLocate, siteType, siteIcon } =
 import siteImg from "images/ogp.jpg";
 
 //型定義
-type Props = {
+type MetaType = {
   pageTitle?: string;
   pageDesc?: string;
   pageImg?: any;
@@ -17,7 +17,7 @@ type Props = {
   pageImgH?: any;
 };
 
-export const Meta = (props: Props) => {
+export const Meta = (props: MetaType) => {
   const { pageTitle, pageDesc, pageImg, pageImgW, pageImgH } = props;
 
   //ページタイトル
