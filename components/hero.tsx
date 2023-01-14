@@ -1,6 +1,9 @@
 import Image from "next/image";
 import styled from "styled-components";
 import cube from "images/cube.jpg";
+import { useEffect, useRef } from "react";
+import { useInView } from "react-intersection-observer";
+import { FadeAnimation } from "./fadeAnimation";
 
 //型定義
 type Props = {
@@ -15,13 +18,19 @@ export const Hero = (props: Props) => {
   return (
     <SFlexContainer>
       <SText>
-        <STitle>{title}</STitle>
-        <SSubTitle>{subTitle}</SSubTitle>
+        <FadeAnimation>
+          <STitle>{title}</STitle>
+        </FadeAnimation>
+        <FadeAnimation>
+          <SSubTitle>{subTitle}</SSubTitle>
+        </FadeAnimation>
       </SText>
       {imageOn && (
-        <SFigure>
-          <Image src={cube} alt="" fill priority placeholder="blur" />
-        </SFigure>
+        <FadeAnimation>
+          <SFigure>
+            <Image src={cube} alt="" fill priority placeholder="blur" />
+          </SFigure>
+        </FadeAnimation>
       )}
     </SFlexContainer>
   );
