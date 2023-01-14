@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 import { useInView } from "react-intersection-observer";
 import styled from "styled-components";
 
+//TypeScriptの型定義 (今回は無視してOK)
 type fadeAnimationType = {
   children: ReactNode;
 };
@@ -9,23 +10,36 @@ type fadeAnimationType = {
 export const FadeAnimation = (props: fadeAnimationType) => {
   const { children } = props;
 
-  //スクロールイベントのオプション
+  /**
+   * スクロールイベントのオプション
+   * 「ref」検知する要素
+   * 「inView」要素が見えたかどうか(見えたらtrue)
+   * 「rootMargin」要素の検知の「余白」を設定
+   * 「triggerOnce」検知を一度だけ行うかどうか
+   */
   const { ref, inView } = useInView({
     rootMargin: "-100px",
     triggerOnce: true,
   });
 
   return (
-    //スクロールさせたい要素を囲む
+    /**
+     * ★スクロールさせたい要素を囲む
+     * refで指定すると対象の要素になる
+     * inViewのtrueかfalseを受け取り、styled-componentに渡す
+     */
     <SFadeElem inView={inView} ref={ref}>
       {children}
     </SFadeElem>
   );
 };
 
-//要素の表示タイミングをtrueかfalseで受け取り、cssを切り替える
+/**
+ * ★inView(trueかfalse)で受け取り、それに応じてcssを切り替える
+ */
 const SFadeElem = styled.span<{ inView: boolean }>`
   display: inline-block;
   transition: opacity 0.5s cubic-bezier(0.47, 0, 0.745, 0.715);
+  //opacityをtrueなら1、falseなら0とする
   opacity: ${(props) => (props.inView ? 1 : 0)};
 `;
