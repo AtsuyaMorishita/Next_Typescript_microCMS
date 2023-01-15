@@ -21,15 +21,18 @@ export const getPostBySlug = async (slug: string) => {
       endpoint: "blogs",
       queries: { filters: `slug[equals]${slug}` },
     });
+    console.log("データの取得成功");
     return post.contents[0];
   } catch (err) {
     console.log("~~ getPostBySlug ~~");
     console.log(err);
+  } finally {
+    console.log("最後に必ず実行される");
   }
 };
 
 /**
- * 全ての記事データを取得する
+ * 全てのスラッグデータを取得する
  */
 export const getAllSlugs = async (limit = 100) => {
   try {
@@ -38,9 +41,32 @@ export const getAllSlugs = async (limit = 100) => {
       endpoint: "blogs",
       queries: { fields: "title,slug", orders: "-publishDate", limit: limit },
     });
+    console.log("データの取得成功");
     return slugs.contents;
   } catch (err) {
     console.log("~~getAllSlugs~~");
+    console.log(err);
+  } finally {
+    console.log("最後に必ず実行される");
+  }
+};
+
+/**
+ * 全ての記事データを取得する
+ */
+export const getAllPosts = async (limit = 100) => {
+  try {
+    const posts = await client.get({
+      endpoint: "blogs",
+      queries: {
+        fields: "title,slug,eyecatch",
+        orders: "-publishDate",
+        limit: limit,
+      },
+    });
+    return posts.contents;
+  } catch (err) {
+    console.log("~~ getAllPosts ~~");
     console.log(err);
   }
 };
