@@ -23,7 +23,7 @@
   --space-md: calc(var(--space-xs) * 2); /* 40-60px */
   --space-lg: calc(var(--space-xs) * 3); /* 80-90px */
   --space-xl: calc(var(--space-xs) * 4); /* 80-120px */
-  --space-jump: clamp(1.25rem, 0.35rem * 3.8vw, 3.75rem); /* 20-60px */
+  --space-jump: clamp(1.25rem, 0.35rem + 3.8vw, 3.75rem); /* 20-60px */
 }
 
 /* 基本設定 */
