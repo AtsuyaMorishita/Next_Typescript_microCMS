@@ -28,6 +28,7 @@ export default function Blog({ posts }: any) {
 export const getStaticProps = async () => {
   const posts = await getAllPosts();
 
+  //アイキャッチが未設定の場合はデフォルトのものを使用
   for (const post of posts) {
     if (!post.hasOwnProperty("eyecatch")) {
       post.eyecatch = eyecatchLocal;

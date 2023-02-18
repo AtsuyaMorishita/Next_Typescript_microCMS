@@ -10,7 +10,6 @@ type postsType = {
 };
 
 export const Posts = ({ posts }: any) => {
-  console.log(posts);
   return (
     <SGridContainer>
       {posts.map(({ title, slug, eyecatch }: postsType) => {
